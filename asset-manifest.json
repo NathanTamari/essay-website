@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/essay-website/static/css/main.e8217a23.css",
+    "main.js": "/essay-website/static/js/main.5723454d.js",
+    "static/js/453.429b96df.chunk.js": "/essay-website/static/js/453.429b96df.chunk.js",
+    "index.html": "/essay-website/index.html",
+    "main.e8217a23.css.map": "/essay-website/static/css/main.e8217a23.css.map",
+    "main.5723454d.js.map": "/essay-website/static/js/main.5723454d.js.map",
+    "453.429b96df.chunk.js.map": "/essay-website/static/js/453.429b96df.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e8217a23.css",
+    "static/js/main.5723454d.js"
+  ]
+}
