@@ -144,3 +144,45 @@ footer {
   color: #a000ff;
   text-shadow: 0 0 8px #a000ff;
 }
+
+/* === NAVBAR === */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  color: #00f6ff;
+  text-shadow: 0 0 8px #00f6ff;
+}
+
+/* === LOGIN FORM DROPDOWN === */
+.login-form {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: rgba(10, 10, 20, 0.95);
+  padding: 1rem;
+  border: 1px solid #00f6ff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 246, 255, 0.4);
+}
+
+.login-form input {
+  display: block;
+  margin: 0.5rem 0;
+  width: 200px;
+}
+
+.error {
+  color: #ff4d4d;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
