@@ -1,4 +1,3 @@
-import React from "react";
 import { AuthProvider, useAuth } from "./auth/AuthContext";
 import GuestPage from "./pages/GuestPage";
 import AdminPage from "./pages/AdminPage";
