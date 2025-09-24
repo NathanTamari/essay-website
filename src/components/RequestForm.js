@@ -1,4 +1,7 @@
+// src/components/RequestForm.jsx
 import React, { useState } from "react";
+import { db } from "../firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import Modal from "./Modal";
 
 export default function RequestForm() {
@@ -9,14 +12,32 @@ export default function RequestForm() {
     email: ""
   });
   const [modalOpen, setModalOpen] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setModalOpen(true);
-    // later: send to backend/email service
+    setSubmitting(true);
+    try {
+      await addDoc(collection(db, "essays"), {
+        topic: form.topic,
+        difficulty: form.difficulty,
+        words: Number(form.words),
+        email: form.email,
+        status: "pending",
+        createdAt: Date.now(),
+        ts: serverTimestamp(),
+      });
+      setModalOpen(true);
+      setForm({ topic: "", difficulty: "1", words: 500, email: "" });
+    } catch (err) {
+      console.error(err);
+      alert("Failed to submit request. Check console for details.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -31,17 +52,13 @@ export default function RequestForm() {
           required
         />
         <br />
-        <label>Difficulty (1-5): </label>
+        <label>Difficulty (1–5): </label>
         <select
           name="difficulty"
           value={form.difficulty}
           onChange={handleChange}
         >
-          {[1, 2, 3, 4, 5].map((n) => (
-            <option key={n} value={n}>
-              {n}
-            </option>
-          ))}
+          {[1,2,3,4,5].map(n => <option key={n} value={n}>{n}</option>)}
         </select>
         <br />
         <label>Word Count: </label>
@@ -50,6 +67,9 @@ export default function RequestForm() {
           name="words"
           value={form.words}
           onChange={handleChange}
+          min={50}
+          step={50}
+          required
         />
         <br />
         <input
@@ -61,7 +81,9 @@ export default function RequestForm() {
           required
         />
         <br />
-        <button type="submit">Submit Request</button>
+        <button type="submit" disabled={submitting}>
+          {submitting ? "Submitting..." : "Submit Request"}
+        </button>
       </form>
 
       <Modal

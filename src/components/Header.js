@@ -5,10 +5,10 @@ export default function Header() {
   const { user, logout, login, error } = useAuth();
   const [showLogin, setShowLogin] = useState(false);
 
-  const handleCeoLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     const { username, password } = e.target;
-    login(username.value, password.value);
+    await login(username.value, password.value);
   };
 
   return (
@@ -18,15 +18,12 @@ export default function Header() {
         {user.role !== "guest" ? (
           <button onClick={logout} className="btn-secondary">Logout</button>
         ) : (
-          <button onClick={() => setShowLogin(!showLogin)} className="btn-primary">
-            CEO Login
-          </button>
+          <button onClick={() => setShowLogin(!showLogin)} className="btn-primary">Login</button>
         )}
       </div>
-
       {showLogin && user.role === "guest" && (
-        <form onSubmit={handleCeoLogin} className="login-form">
-          <input name="username" placeholder="CEO Username" />
+        <form onSubmit={handleLogin} className="login-form">
+          <input name="username" placeholder="Username" />
           <input type="password" name="password" placeholder="Password" />
           <button type="submit" className="btn-primary">Login</button>
           {error && <p className="error">{error}</p>}

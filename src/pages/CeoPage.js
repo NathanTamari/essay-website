@@ -1,6 +1,7 @@
-import AdminDashboard from "../components/AdminDashboard";
+import React from "react";
 import { useAuth } from "../auth/AuthContext";
 import CeoControlCenter from "../components/CeoControlCenter";
+import AdminDashboard from "../components/AdminDashboard";
 
 export default function CeoPage() {
   const { logout } = useAuth();
